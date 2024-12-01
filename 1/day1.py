@@ -25,3 +25,23 @@ with open('1/input.txt', 'r') as file:
   print(distance)
 
 #Challenge 2
+with open('1/input.txt', 'r') as file:
+  content = file.read()
+  contentTrim = content.replace("\n", "   ")
+  contentList = contentTrim.split("   ")
+
+  leftList = []
+  rightList = []
+
+  for i in range(len(contentList)):
+    if(i % 2 == 0):
+      leftList.append(int(contentList[i]))
+    else:
+      rightList.append(int(contentList[i]))
+
+  similarity = 0
+
+  for i in range(len(leftList)):
+    similarity += leftList[i] * rightList.count(leftList[i])
+
+  print(similarity)
