@@ -24,9 +24,13 @@ with open('2/input.txt', 'r') as file:
       if isIncreasing == False:
         if(0 < int(x[y]) - int(x[y + 1]) <= 3):
           isTrue += 1
+        elif(y != (len(x) -2 ) and 0 < int(x[y]) - int(x[y + 1]) <= 3):
+          isTrue += 1
 
       if isIncreasing == True:
         if(-3 <= int(x[y]) - int(x[y + 1]) < 0):
+          isTrue += 1
+        elif(y != (len(x) -2 ) and -3 <= int(x[y]) - int(x[y + 1]) < 0):
           isTrue += 1
 
       if(y == isTrue and y == (len(x) - 2)):
