@@ -6,7 +6,6 @@ with open('4/input.txt', 'r') as file:
   for i in contentList:
     reverseContentList.append(list(reversed(i)))
 
-
 def horizontal(list):
   count = 0
 
@@ -57,10 +56,29 @@ def diagonal(list):
 
 
   return count
-v = (vertical(contentList))
-h = (horizontal(contentList))
-d = (diagonal(contentList))
-dr = (diagonal(reverseContentList))
 
-print(v+h+d+dr)
+def mas(list):
+  count = 0
+  
+  for x in range(len(list)):
+    if x + 3 > len(list):
+      break
 
+    for i in range(len(list[x]) - 2):
+      answer = list[x][i]
+      answer += list[x + 1][i + 1]
+      answer += list[x + 2][i + 2]
+
+      rAnswer = list[x][i + 2]
+      rAnswer += list[x + 1][i + 1]
+      rAnswer += list[x + 2][i]
+
+      print(f"{answer} {rAnswer}")
+        
+      if (answer == "MAS" or answer == "SAM") and (rAnswer == "MAS" or rAnswer == "SAM"):
+        print(f"{answer} {rAnswer} {x} {i}")
+        count += 1
+
+  return count
+
+print(mas(contentList))
