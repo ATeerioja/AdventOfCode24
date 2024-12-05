@@ -1,3 +1,5 @@
+import timeit
+
 with open('4/input.txt', 'r') as file:
   content = file.read()
   contentList = content.split("\n")
@@ -81,4 +83,11 @@ def mas(list):
 
   return count
 
-print(mas(contentList))
+start = timeit.default_timer()
+
+print(horizontal(contentList)+vertical(contentList)+diagonal(contentList)+diagonal(reverseContentList))
+
+stop = timeit.default_timer()
+
+print('Time: ', stop - start) 
+
