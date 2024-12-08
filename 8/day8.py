@@ -24,38 +24,40 @@ for i in filteredTowers:
 
   for x in indexes:
     center = x
+    print(f"center {center}")
 
     for z in indexes:
       if z == center:
         continue
 
-      print(z)
+      calc.add(center)
       
       xDiff = z[1] - center[1]
       yDiff = z[0] - center[0]
 
       totalDiff = (yDiff, xDiff)
+      check = True
 
 
-      for i in range(1,100):
-        newCoordinate  = ((center[0] - yDiff) * i, (center[1] - xDiff) * i)
-      
+      for i in range(1, 100):
+        newCoordinate  = ((center[0] - yDiff * i), (center[1] - xDiff * i))
 
+
+        print(f"Try {newCoordinate}")
+
+        
         try:
           arvo = mapMatrix[newCoordinate[0]][newCoordinate[1]] 
           if(newCoordinate[0] >= 0 and newCoordinate[1] >= 0):
-            print(newCoordinate)
             calc.add(newCoordinate)
             print(f"laiton tähän yhen bossi{newCoordinate}")
-        
+          else:
+            break
+
         except:
-          print("Exception")
           break
 
-        
 print(len(calc))
-
-
 
 
 
