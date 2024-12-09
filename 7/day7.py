@@ -10,6 +10,7 @@ def try_all_operator_combinations(numbers, answer):
     }
     
     # Get all possible combinations of `len(numbers) - 1` operators
+    
     operator_combinations = list(itertools.product(operators.keys(), repeat=len(numbers) - 1))
     
     results = []
@@ -59,8 +60,3 @@ for i in equationList:
     continue
 
 print(sum)
-      
-
-
-
-
