@@ -14,7 +14,6 @@ with open("9/input.txt", "r") as file:
   line = []
   for i in range(len(data)):
     tempLine = []
-    print(f"{i} / {len(data)}")
     if i % 2 == 0:
 
       for z in range(memory[calc][1]):
@@ -28,47 +27,61 @@ with open("9/input.txt", "r") as file:
 
     line.append(tempLine)
 
-print(line)
+changed = set()
 
 for rev in reversed(range(len(line))):
+  print(f"{rev} / {len(line)}")
   try:
-    print(line[rev][0])
+    newLine = ""
+    
+    if(line[rev][0] in changed):
+      continue
+
     if(line[rev][0] != "."):
+      changed.add(line[rev][0])
       spaceReq = len(line[rev])
 
-      for i in range(len(line)):
-        print(line[i].count("."))
+      for i in range(rev):
+
         if(line[i].count(".") >= spaceReq):
-          for x in range(len(line[rev])):
-            if(line[rev][x] != "."):
-              line[i][x] = line[rev][i]
-              line[rev][i] = "."
+          length = 0
+
+          for x in range(len(line[i])):
+            if length >= spaceReq:
+              raise Exception("End")
+            
+            if(line[i][x] == "."):
+              line[i][x] = line[rev][length]
+              line[rev][length] = "."
+              length += 1
+          
+          break
+
+            
 
   except:
-    print("Empty")
     continue
 
 print(line)
 
-"""
-  for x in range(len(line)):
-    print(f"{x} / {len(line)}")
-    if(line[x] == "."):
+sum = 0
+calc = 0
 
-      for reverse in reversed(range((len(line)))):
-        if( line[reverse] != "."):
-          value = line[reverse]
-          line[reverse] = line[x]
-          line[x] = value
-          break
+newLine = ""
+for i in line:
+  for x in i:
+    newLine += x
 
-  sum = 0
-  for num in range(len(line)):
-    print(f"{num} / {len(line)}")
-    if line[num] == ".":
+print(newLine)
+  
+
+for i in range(len(line)):
+  for x in range(len(line[i])):
+    if line[i][x] == ".":
+      calc += 1
       continue
 
-    sum += num * int(line[num])
+    sum += int(line[i][x]) * calc
+    calc += 1
   
-  print(sum)
-"""
+print(sum)
