@@ -60,9 +60,7 @@ def loop(start):
 
     if(allBranches[1] == 9):
       for i in allBranches[0]:
-        if(i not in endingLocations):
-          loops += 1
-          endingLocations.add(i)
+        loops += 1
 
       break
 
@@ -73,7 +71,6 @@ sum = 0
 for i in startingLocations:
   start = ((i, 0))
   loops = 0
-  endingLocations = (set())
   loop(start)
   print(f"{start} {loops} loops")
   sum += loops
