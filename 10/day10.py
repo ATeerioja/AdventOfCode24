@@ -8,6 +8,7 @@ with open("10/input.txt", "r") as file:
     trailMapMatrix.append(list(i))
   
 startingLocations = []
+
 loops = 0
 
 for i in range(len(trailMapMatrix)):
@@ -23,23 +24,23 @@ def checkBranches(data):
   newStep = step
 
   #Check if in matrix
-  if not(start[0] - 1 < 0 or start[1] + 1 >= len(trailMapMatrix[0])):      
+  if not start[0] - 1 < 0 and trailMapMatrix[start[0] - 1][start[1]] == str(step + 1) :
+    branches.append((start[0] - 1,start[1]))
+    newStep = step + 1
+
+  if not start[1] + 1 >= len(trailMapMatrix[0]) and  trailMapMatrix[start[0]][start[1] + 1] == str(step + 1):
+    branches.append((start[0],start[1] + 1))
+    newStep = step + 1
     
-    if trailMapMatrix[start[0] - 1][start[1]] == str(step + 1):
-      branches.append((start[0] - 1,start[1]))
-      newStep = step + 1
+  if not start[0] + 1 >= len(trailMapMatrix) and trailMapMatrix[start[0] + 1][start[1]] == str(step + 1):
+    branches.append((start[0] + 1,start[1]))
+    newStep = step + 1
 
-    if trailMapMatrix[start[0]][start[1] + 1] == str(step + 1):
-      branches.append((start[0],start[1] + 1))
-      newStep = step + 1
-
-  if trailMapMatrix[start[0]][start[1] - 1] == str(step + 1):
+  if not start[1] - 1 < 0 and trailMapMatrix[start[0]][start[1] - 1] == str(step + 1):
     branches.append((start[0],start[1] - 1))
     newStep = step + 1
 
-  if trailMapMatrix[start[0] + 1][start[1]] == str(step + 1):
-    branches.append((start[0] + 1,start[1]))
-    newStep = step + 1
+  
 
   
   return ((branches, newStep))
@@ -48,27 +49,36 @@ def checkBranches(data):
 def loop(start):
   global loops
   allBranches = checkBranches(start)
-  print(allBranches)
 
   for branch in allBranches[0]:
     next = ((branch, allBranches[1]))
 
+    if():
+      print("Empty")
+      break
+  
+
     if(allBranches[1] == 9):
-      print("Löytyi 9")
-      loops += 1
+      for i in allBranches[0]:
+        if(i not in endingLocations):
+          loops += 1
+          endingLocations.add(i)
+
       break
 
-    print(next)
     loop(next)
     
  
 sum = 0
 for i in startingLocations:
-  print(i)
   start = ((i, 0))
+  loops = 0
+  endingLocations = (set())
   loop(start)
-  print(loops)
+  print(f"{start} {loops} loops")
   sum += loops
+
+print(sum)
   
 
 
